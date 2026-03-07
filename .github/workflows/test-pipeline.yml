@@ -27,7 +27,7 @@ jobs:
           echo "Environment: ${{ inputs.environment }}"
           echo "Notes: ${{ inputs.notes }}"
       - name: Initialize
-        run: sleep 5
+        run: sleep 1
 
   build-frontend:
     name: Build Frontend
@@ -37,7 +37,7 @@ jobs:
       - name: Build frontend artifacts
         run: |
           echo "Building frontend for ${{ inputs.environment }}"
-          sleep 10
+          sleep 1
 
   build-backend:
     name: Build Backend
@@ -51,7 +51,7 @@ jobs:
             echo "::error::Simulated backend build failure"
             exit 1
           fi
-          sleep 10
+          sleep 1
 
   run-linting:
     name: Run Linting
@@ -61,7 +61,7 @@ jobs:
       - name: Lint codebase
         run: |
           echo "Linting code for ${{ inputs.environment }}"
-          sleep 5
+          sleep 1
 
   deploy:
     name: Deploy
@@ -71,7 +71,7 @@ jobs:
       - name: Deploy to environment
         run: |
           echo "Deploying to ${{ inputs.environment }}"
-          sleep 10
+          sleep 1
 
   smoke-test:
     name: Smoke Test
@@ -81,7 +81,7 @@ jobs:
       - name: Run smoke tests
         run: |
           echo "Running smoke tests on ${{ inputs.environment }}"
-          sleep 5
+          sleep 1
 
   notify:
     name: Notify
@@ -92,4 +92,4 @@ jobs:
         run: |
           echo "Pipeline complete for ${{ inputs.environment }}"
           echo "Notes: ${{ inputs.notes }}"
-          sleep 5
+          sleep 1

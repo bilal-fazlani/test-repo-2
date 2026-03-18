@@ -33,26 +33,20 @@ jobs:
     name: Build Frontend
     runs-on: ubuntu-latest
     needs: setup
-    strategy:
-      matrix:
-        node: [18, 20, 22]
     steps:
       - name: Build frontend artifacts
         run: |
-          echo "Building frontend for ${{ inputs.environment }} on Node ${{ matrix.node }}"
+          echo "Building frontend for ${{ inputs.environment }}"
           sleep 1
 
   build-backend:
     name: Build Backend
     runs-on: ubuntu-latest
     needs: setup
-    strategy:
-      matrix:
-        node: [18, 20, 22]
     steps:
       - name: Build backend artifacts
         run: |
-          echo "Building backend for ${{ inputs.environment }} on Node ${{ matrix.node }}"
+          echo "Building backend for ${{ inputs.environment }}"
           if [ "${{ inputs.notes }}" = "FAIL" ]; then
             echo "::error::Simulated backend build failure"
             exit 1
@@ -63,13 +57,10 @@ jobs:
     name: Run Linting
     runs-on: ubuntu-latest
     needs: setup
-    strategy:
-      matrix:
-        node: [18, 20, 22]
     steps:
       - name: Lint codebase
         run: |
-          echo "Linting code for ${{ inputs.environment }} on Node ${{ matrix.node }}"
+          echo "Linting code for ${{ inputs.environment }}"
           sleep 1
 
   deploy:

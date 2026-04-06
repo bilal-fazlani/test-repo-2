@@ -1,0 +1,65 @@
+name: Chain Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      notes:
+        description: "Test notes"
+        required: false
+        type: string
+
+jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Initialize
+        run: echo "Setting up" && sleep 2
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Compile
+        run: echo "Building" && sleep 3
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Run tests
+        run: echo "Testing" && sleep 3
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Lint check
+        run: echo "Linting" && sleep 2
+
+  package:
+    name: Package
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Create artifact
+        run: echo "Packaging" && sleep 2
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Scan dependencies
+        run: echo "Scanning" && sleep 4
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [package, security-scan]
+    steps:
+      - name: Deploy
+        run: echo "Deploying" && sleep 2
